@@ -14,8 +14,8 @@ APACHE_DIR="/etc/apache2/sites-available/"
 DROPBOX_UPLOADER="/home/ubuntu/Dropbox-Uploader/dropbox_uploader.sh"
 DROPBOX_CLOUD_DIR="server_backups/iandi"
 DBUSER="root"
-DBPASS="rasta10f9996"
-DB="wikimedia"
+DBPASS="nsaproofpass"
+DB="jahdb"
 
 
 # Run backups
