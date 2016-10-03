@@ -1,12 +1,13 @@
 #!/bin/bash
 
 ###############################################
-### Description: Basic web server backups	###
-### Author: Infinite						###
+### Description: Basic web server backups   ###
+### Author: Infinite                        ###
 ###############################################
 
 # Crontab --->   0 5 */2  *  * bash /home/ubuntu/web_backup/backup.sh
 # Deletes backups older than 16 days
+
 
 BACKUP_DIR="/home/ubuntu/web_backups/backups"
 WEB_DIR="/var/www/"
@@ -46,9 +47,9 @@ DROPBOX_DATES=""
 
 for i in "${DROPBOX_LIST[@]}"
 do
-	# Filter file names only
-	DROPBOX_FILES[$COUNT]=$(echo $i | awk '{print $3}')
-	DROPBOX_DATES[$COUNT]=$(echo $i | awk '{print $3}'|cut -d . -f 2)
+    # Filter file names only
+    DROPBOX_FILES[$COUNT]=$(echo $i | awk '{print $3}')
+    DROPBOX_DATES[$COUNT]=$(echo $i | awk '{print $3}'|cut -d . -f 2)
 
 	((COUNT++))
 done
@@ -60,9 +61,8 @@ COUNT=0
 
 for i in "${OLD_BACKUPS[@]}"
 do
-	OLD_FILE[$COUNT]=$(echo $i | cut -d / -f 5)
-	#echo ${OLD_FILE[$COUNT]}
-	bash $DROPBOX_UPLOADER delete $DROPBOX_CLOUD_DIR/${OLD_FILE[$COUNT]}
+    OLD_FILE[$COUNT]=$(echo $i | cut -d / -f 5)
+    bash $DROPBOX_UPLOADER delete $DROPBOX_CLOUD_DIR/${OLD_FILE[$COUNT]}
     rm $i
 
 	((COUNT++))
