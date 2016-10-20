@@ -5,17 +5,16 @@
 ### Author: Infinite                        ###
 ###############################################
 
-# Crontab --->   0 5 */2  *  * bash /home/ubuntu/web_backup/backup.sh
+# Crontab --->   0 5 */2  *  * bash /home/ubuntu/web_backups/backup.sh
 # Deletes backups older than 16 days
-
 
 BACKUP_DIR="/home/ubuntu/web_backups/backups"
 WEB_DIR="/var/www/"
 APACHE_DIR="/etc/apache2/sites-available/"
 DROPBOX_UPLOADER="/home/ubuntu/Dropbox-Uploader/dropbox_uploader.sh"
-DROPBOX_CLOUD_DIR="server_backups/iandi"
+DROPBOX_CLOUD_DIR="server_backups/server1"
 DBUSER="root"
-DBPASS="nsaproofpass"
+DBPASS="nasasecurepass"
 DB="jahdb"
 
 
@@ -47,11 +46,11 @@ DROPBOX_DATES=""
 
 for i in "${DROPBOX_LIST[@]}"
 do
-    # Filter file names only
+	# Filter file names only
     DROPBOX_FILES[$COUNT]=$(echo $i | awk '{print $3}')
     DROPBOX_DATES[$COUNT]=$(echo $i | awk '{print $3}'|cut -d . -f 2)
 
-	((COUNT++))
+    ((COUNT++))
 done
 
 # Delete old backups on Dropbox
@@ -65,6 +64,6 @@ do
     bash $DROPBOX_UPLOADER delete $DROPBOX_CLOUD_DIR/${OLD_FILE[$COUNT]}
     rm $i
 
-	((COUNT++))
+    ((COUNT++))
 done
 
